@@ -4,25 +4,25 @@ Everything you need to follow the two-week course: **one Maven module per day** 
 **slide decks as PDF**. Open the whole folder in your IDE as a single Maven project — every
 day shows up as a module, including the days that have no Java.
 
-> **Companion to the course repo.** This pack is used alongside the main course repository,
-> [`githubmo/modern-java-25-course`](https://github.com/githubmo/modern-java-25-course). The
-> tool and app days drive shared assets that live in that repo — the Compose stack
-> (`infra/compose.yaml`), the reference app (`apps/`), the deeper write-ups (`docs/`), the
-> Slidev sources (`slides/`), and the `checkpoint/day-NN` Git tags. Clone it next to this pack:
->
-> ```bash
-> git clone https://github.com/githubmo/modern-java-25-course.git
-> ```
+> **Self-contained.** Everything the hands-on days need is in this repo: the Compose stack
+> (`infra/compose.yaml`), and the reference application at each day's `checkpoint/day-NN` Git
+> tag (`git checkout checkpoint/day-09`). You do **not** need to clone anything else to do the
+> labs. The full course repository,
+> [`githubmo/modern-java-25-course`](https://github.com/githubmo/modern-java-25-course), is the
+> upstream home of the Slidev slide sources and the deeper `docs/` write-ups, but it is optional.
 
 ## What's in here
 
 ```
 modern-java-25-course-student-pack/
 ├─ pom.xml                     # aggregator — imports all 10 day modules
+├─ infra/                      # the Compose stack (Postgres + Kafka + observability)
+│  └─ compose.yaml
 ├─ slides/                     # day-01.pdf … day-10.pdf  (generated in the course repo)
 ├─ skeletons/                  # compiling hello-world Quarkus apps — safe start for days 08–10
 │  ├─ kyc-service/
 │  └─ screening-service/
+├─ apps/                       # appears when you `git checkout checkpoint/day-NN` (days 08–10)
 └─ day-NN-topic/
    ├─ pom.xml                  # the module (pom-packaging; days are materials, not a build)
    ├─ README.md                # the day's brief: goal, run commands, acceptance checklist
@@ -56,9 +56,9 @@ still a module so the structure is uniform and the whole course opens as one pro
 
 ## Prerequisites
 
-The course repo pins everything with [`mise`](https://mise.jdx.dev) (see `mise.toml`): **JDK 25**,
-the **`quarkus`** CLI, Docker (Compose V2), and PostgreSQL client tools. From the repo root,
-`mise install` gets you the toolchain. The exercises use the **real commands**
+This pack pins the toolchain with [`mise`](https://mise.jdx.dev) (see `mise.toml`): **JDK 25**,
+plus Node and Python. Docker (Compose V2), the **`quarkus`** CLI, and PostgreSQL client tools
+are also expected. From the repo root, `mise install` gets you the pinned runtimes. The exercises use the **real commands**
 (`docker compose …`, `./mvnw …`, `quarkus …`, `psql`, the Kafka CLI) — no `task` wrapper.
 
 ## Slides (PDF)
@@ -84,5 +84,7 @@ That writes `slides/day-01.pdf … day-10.pdf` and `dist/databytes-java25-studen
 - **Tool days (01, 02, 06, 07):** no code to "solve" — the brief's commands and acceptance
   checklist are the answer key.
 
-The running reference implementation is the course repo's `apps/` (order-service +
-notification-service). The deeper concept write-ups are in its `docs/content/day-NN/`.
+Checking out `checkpoint/day-NN` materialises the running reference implementation under
+`apps/` (order-service + notification-service) at that day's state. The deeper concept
+write-ups live in the [course repo](https://github.com/githubmo/modern-java-25-course)'s
+`docs/content/day-NN/`.

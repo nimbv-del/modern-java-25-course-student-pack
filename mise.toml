@@ -1,0 +1,12 @@
+# Toolchain pins for the whole monorepo. `mise install` provisions these.
+# Graphviz and the Quarkus CLI are installed by the Dev Container (see .devcontainer).
+
+[tools]
+java = "temurin-25"
+node = "22"
+python = "3.12"
+uv = "latest"
+
+[env]
+# Quarkus picks these up; keep dev/test/prod behaviour explicit.
+QUARKUS_PROFILE = "dev"
